@@ -18,7 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="-parameters" />
       <module name="java-se" options="-parameters" />
-      <module name="java-study" options="-parameters" />
+      <module name="java-study" options="" />
     </option>
   </component>
 </project>
