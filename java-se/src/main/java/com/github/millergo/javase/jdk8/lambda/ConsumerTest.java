@@ -2,8 +2,6 @@ package com.github.millergo.javase.jdk8.lambda;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -12,7 +10,6 @@ import java.util.function.Consumer;
 public class ConsumerTest {
     @Test
     void testAndThen() {
-        List<String> myFamily = Arrays.asList("Miller", "Mila", "Vicky");
         Consumer<String> consumer1 = (param) -> {
             String toUpperCase = param.toUpperCase();
             System.out.println(toUpperCase);
