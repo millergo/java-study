@@ -2,6 +2,7 @@ package com.github.millergo.javase.thread;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -21,7 +22,6 @@ public class MakeTeaExample {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
-
         // 创建线程2的FutureTask
         FutureTask<String> ft2 = new FutureTask<String>(new T2Task());
         // 创建线程1的FutureTask
