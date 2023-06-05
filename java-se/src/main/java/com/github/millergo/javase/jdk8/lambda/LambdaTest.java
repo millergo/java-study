@@ -35,16 +35,16 @@ public class LambdaTest {
 
     @Test
     void myFunction() {
-        MyFunction myFunction = (paramOne) -> {
+        MyFunctionInterface myFunctionInterface = (paramOne) -> {
         };
-        System.out.println(myFunction.getClass().getTypeName());
+        System.out.println(myFunctionInterface.getClass().getTypeName());
         // 如果lambda代码块只有一行可以省略（）、{}。 默认可以省略类型声明，编译器会自动推断类型。
-        MyFunction<String> myFunction2 = (String paramOne) -> {
+        MyFunctionInterface<String> myFunctionInterface2 = (String paramOne) -> {
             // 传递行为：将参数转换为大写
             String result = paramOne.toUpperCase();
             System.out.println(result);
         };
-        myFunction2.method("Miller");
+        myFunctionInterface2.method("Miller");
     }
 }
 
@@ -53,7 +53,7 @@ public class LambdaTest {
  * 函数式编程与面向对象最大的不同在于，函数式编程传递的是行为（具体实现由客户端决定），而面向对象编程传递的是数据（具体实现已预先定义）。
  */
 @FunctionalInterface
-interface MyFunction<P> {
+interface MyFunctionInterface<P> {
     /**
      * 接受一个参数不返回结果
      */
