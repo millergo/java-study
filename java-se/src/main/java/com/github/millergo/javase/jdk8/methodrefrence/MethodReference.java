@@ -1,9 +1,13 @@
-package com.github.millergo.javase.jdk8;
+package com.github.millergo.javase.jdk8.methodrefrence;
 
 import java.util.Arrays;
 
 /**
- * 方法引用
+ * 方法引用实际上是lambada表达式的一种语法糖形式。只是方法引用所引用的方法体刚好有一个现成的方法已经实现了此功能，所以可以直接使用。
+ * 方法引用共分为4类：
+ * 1. 类名::静态方法名；
+ * 2. 引用名(对象名)::实例方法名；
+ *
  */
 public class MethodReference {
     public static void main(String[] args) {
@@ -14,8 +18,7 @@ public class MethodReference {
 
         // 因为实例方法有一个隐含的this参数，String类的compareTo()方法在实际调用的时候，第一个隐含参数总是传入this，相当于静态方法
         // public static int compareTo(this, String o);
-        Arrays.sort(array, String::compareTo);
-        System.out.println(String.join(", ", array));
+         System.out.println(String.join(", ", array));
 
     }
 

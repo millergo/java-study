@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.function.Consumer;
 
 /**
- * Consumer 函数接口的含义维接受一个参数，不返回结构。
+ * Consumer 函数接口的含义为接受一个参数，不返回结果。
  */
 public class ConsumerTest {
     @Test

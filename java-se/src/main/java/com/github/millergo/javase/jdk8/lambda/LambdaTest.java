@@ -14,6 +14,7 @@ import java.util.function.Consumer;
  * 2: param1, param2 -> {statement...} <br>
  * 3: param1 -> {statement...} <br>
  * 4: () -> {statement...} <br>
+ * 5: x -> statement
  *
  * @see FunctionalInterface
  */
@@ -24,9 +25,9 @@ public class LambdaTest {
     void lambdaShouldBeJavaObject() {
         List<String> myFamily = Arrays.asList("Miller", "Mila", "Vicky");
         myFamily.forEach(value -> System.out.println(value));
+
         // 通过一个引用类型指向一个对象
-        Consumer consumer = param -> {
-        };
+        Consumer consumer = param -> {};
         System.out.println(consumer.getClass());
         System.out.println(consumer.getClass().getSimpleName());
         System.out.println(consumer.getClass().getSuperclass());
@@ -35,8 +36,7 @@ public class LambdaTest {
 
     @Test
     void myFunction() {
-        MyFunctionInterface myFunctionInterface = (paramOne) -> {
-        };
+        MyFunctionInterface myFunctionInterface = (paramOne) -> {};
         System.out.println(myFunctionInterface.getClass().getTypeName());
         // 如果lambda代码块只有一行可以省略（）、{}。 默认可以省略类型声明，编译器会自动推断类型。
         MyFunctionInterface<String> myFunctionInterface2 = (String paramOne) -> {
