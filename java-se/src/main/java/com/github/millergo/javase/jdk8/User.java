@@ -6,13 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-/**
- * @Project: java
- * @Author: Miller
- * @Time: 2020-06-28 16:51
- * @Email: miller.shan@aliyun.com;miller.shan.dd@gmail.com
- * @Description:
- **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,17 +1,16 @@
 package com.github.millergo.javase.jdk8;
 
-/**
- * @author Miller Shan
- * @version 1.0
- * @since 2023/8/14 10:22:02
- */
-
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author Miller Shan
+ * @version 1.0
+ * @since 2023/8/14 10:22:02
+ */
 public class TempTest {
     public static void main(String[] args) {
         List<Person> list1 = new ArrayList<>();
@@ -34,17 +33,14 @@ public class TempTest {
         list2.add(5);
         list2.add(7);
 
-        List<String> list3 = list1.stream()
-                .filter(obj -> !list2.contains(obj.getId()))
-                .map(obj -> obj.getName())
-                .collect(Collectors.toList());
+        List<String> list3 = list1.stream().filter(obj -> !list2.contains(obj.getId())).map(obj -> obj.getName()).collect(Collectors.toList());
 
         System.out.println(list3);
     }
 }
 
 @Data
-class Person{
+class Person {
     Integer id;
     String name;
 }
