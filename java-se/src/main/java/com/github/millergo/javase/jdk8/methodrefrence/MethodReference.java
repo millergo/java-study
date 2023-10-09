@@ -1,6 +1,8 @@
 package com.github.millergo.javase.jdk8.methodrefrence;
 
 import com.github.millergo.javase.jdk8.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,6 @@ import java.util.function.Function;
  * 4. 构造方法引用,类名::new
  */
 public class MethodReference {
-
 
     @DisplayName("类名::静态方法名")
     @Test
@@ -73,7 +74,21 @@ public class MethodReference {
 
     @DisplayName("构造方法引用,类名::new")
     @Test
-    void testConstuctMethodReference() {
+    void testConstructMethodReference() {
         Runnable aNew = MethodReference::new;
+    }
+}
+@AllArgsConstructor
+@Data
+class Person {
+    private String name;
+    private Integer age;
+
+    public int compareByAge(Person person) {
+        return this.getAge() - person.getAge();
+    }
+
+    public int compareByName(Person person) {
+        return this.getName().compareToIgnoreCase(person.getName());
     }
 }
