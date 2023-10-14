@@ -1,12 +1,11 @@
 package com.github.millergo.javase.collection;
 
-import com.github.millergo.javase.jdk8.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author miller
@@ -42,5 +41,29 @@ public class HashSetTest {
         map.put("Miller", user);
         // map.put("Miller", user);
         map.forEach((key, user2) -> System.out.println(user2));
+    }
+}
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+class User {
+    private String name;
+    private Integer age;
+    private Double salary;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name)
+                && Objects.equals(age, user.age)
+                && Objects.equals(salary, user.salary);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, salary);
     }
 }

@@ -1,6 +1,5 @@
 package com.github.millergo.javase.jdk8.stream;
 
-import com.github.millergo.javase.jdk8.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +9,16 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * Steam(流)，是对数据的操作，共分为3部分：
+ * Stream(流)，是对元素的聚合操作，支持串行或并行。
+ * 一个 Stream 由三部分组成：
  * 1. 数据源；
  * 2. 0个或多个中间操作；
  * 3. 终止操作(惰性求值)。
  *
  * @author Miller Shan
+ * @see Stream
  */
-public class StreamTest {
+public class StreamTest01 {
 
     @DisplayName("流的声明")
     @Test
@@ -28,7 +29,6 @@ public class StreamTest {
         List<String> myFamily = Arrays.asList("Miller", "Mila", "Vicky");
         // Create Stream by stream()
         myFamily.stream();
-
     }
 
     @DisplayName("流的惰性求值")
@@ -40,7 +40,7 @@ public class StreamTest {
         // 第一步：创建流
         Stream<Integer> stream = users.stream();
 
-        // 第二步：中间操作
+        // 第二步：中间操作。对流的操作是不会影响到源数据。
         Stream<Integer> userStream = stream.filter((predicate) -> {
             System.out.println("Steam API 正在操作流！");
             return predicate > 33;
@@ -64,6 +64,4 @@ public class StreamTest {
                 .reduce(Integer::sum);
         System.out.println(reduce.get());
     }
-
-
 }

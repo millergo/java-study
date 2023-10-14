@@ -1,6 +1,5 @@
 package com.github.millergo.javase.jdk8.methodrefrence;
 
-import com.github.millergo.javase.jdk8.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.DisplayName;

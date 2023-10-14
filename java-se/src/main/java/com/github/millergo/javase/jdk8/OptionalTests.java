@@ -1,5 +1,8 @@
 package com.github.millergo.javase.jdk8;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -73,4 +76,12 @@ public class OptionalTests {
         System.out.println(Optional.ofNullable(u1).map(user -> user.getName()).orElse("默认值"));
         System.out.println(Optional.ofNullable(u2).map(user -> user.getName()).orElse("默认值"));
     }
+}
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+class User {
+    private String name;
+    private Integer age;
+    private Double salary;
 }
