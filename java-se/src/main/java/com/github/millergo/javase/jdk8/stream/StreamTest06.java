@@ -23,11 +23,11 @@ import java.util.stream.Collectors;
  * @since 2023/10/14 16:06:43
  */
 public class StreamTest06 {
-    User user1 = new User("Miller", 30, 90.0);
-    User user2 = new User("Miller", 50, 80.0);
-    User user3 = new User("Vicky", 50, 80.0);
-    User user4 = new User("Mila", 80, 80.0);
-    List<User> userList = Arrays.asList(user1, user2, user3, user4);
+    private User user1 = new User("Miller", 30, 90.0);
+    private User user2 = new User("Miller", 50, 80.0);
+    private User user3 = new User("Vicky", 50, 80.0);
+    private User user4 = new User("Mila", 80, 80.0);
+    private List<User> userList = Arrays.asList(user1, user2, user3, user4);
 
     @DisplayName("流的分组")
     @Test
