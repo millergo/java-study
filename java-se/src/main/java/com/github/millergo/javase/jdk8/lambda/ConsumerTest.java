@@ -10,11 +10,11 @@ import java.util.function.Consumer;
 public class ConsumerTest {
     @Test
     void testAndThen() {
-        Consumer<String> consumer1 = (param) -> {
+        Consumer<String> consumer1 = (String param) -> {
             String toUpperCase = param.toUpperCase();
             System.out.println(toUpperCase);
         };
-        Consumer<String> consumer2 = (param) -> {
+        Consumer<String> consumer2 = (var param) -> {
             CharSequence charSequence = param.subSequence(0, param.length() - 1);
             System.out.println(charSequence);
         };

@@ -14,7 +14,7 @@ public class FunctionInterfaceTest {
     @Test
     @DisplayName("测试Function接口")
     void testFunctionInterface() {
-        FunctionInterfaceTest functionInterfaceTest = new FunctionInterfaceTest();
+        var functionInterfaceTest = new FunctionInterfaceTest();
 
         String result = functionInterfaceTest.functionMethod(33, value -> value + " Miller");
         System.out.println(result);
@@ -23,7 +23,7 @@ public class FunctionInterfaceTest {
     @Test
     @DisplayName("组合函数")
     void testComposeFunction() {
-        FunctionInterfaceTest functionInterfaceTest = new FunctionInterfaceTest();
+        var functionInterfaceTest = new FunctionInterfaceTest();
 
         // 36
         System.out.println(functionInterfaceTest.compose(2, value -> value * value, value2 -> value2 * 3));
