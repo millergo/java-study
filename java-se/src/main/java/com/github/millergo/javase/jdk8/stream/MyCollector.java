@@ -24,7 +24,8 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
     @Override
     public Supplier<Set<T>> supplier() {
         System.out.println(this.getClass().getName() + " supplier invoked!");
-        return HashSet::new;
+//        return HashSet::new;
+        return () -> new HashSet();
     }
 
     /**
@@ -33,8 +34,13 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
     @Override
     public BiConsumer<Set<T>, T> accumulator() {
         System.out.println(this.getClass().getName() + " accumulator invoked!");
-        return Set::add;
+        // return Set::add;
+        /*
+        Error,这里不能用具体的类型，因为如果用具体的类型（HashSet）那么不一定能存放到可变容器中。
+        因为在 supplier() 方法返回的容器可能会是 TreeSet、HashSet、SortedSet 等。
+         */
         // return HashSet::add;
+        return (item1, item2) -> item1.add(item2);
     }
 
     /**
