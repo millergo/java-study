@@ -19,17 +19,21 @@ import java.util.stream.Collector;
  */
 public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
     /**
-     * 可变容器的结果
+     * 创建一个新的可变容器
      */
     @Override
     public Supplier<Set<T>> supplier() {
         System.out.println(this.getClass().getName() + " supplier invoked!");
 //        return HashSet::new;
-        return () -> new HashSet();
+        return () -> {
+            HashSet<T> hashSet = new HashSet<>();
+            System.out.println("supplier function invoked Memory hashSet ID is: " + System.identityHashCode(hashSet));
+            return hashSet;
+        };
     }
 
     /**
-     * 将结算结果累积到可变容器中
+     * 将元素累积到可变容器中
      */
     @Override
     public BiConsumer<Set<T>, T> accumulator() {
@@ -40,7 +44,11 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
         因为在 supplier() 方法返回的容器可能会是 TreeSet、HashSet、SortedSet 等。
          */
         // return HashSet::add;
-        return (item1, item2) -> item1.add(item2);
+        return (set, inputElement) -> {
+            // 通过打印 set 的内存地址可以发现，这里的set对象就是 supplier() 方法生成的对象
+            System.out.println("accumulator function invoked Memory set ID is: " + System.identityHashCode(set));
+            set.add(inputElement);
+        };
     }
 
     /**
@@ -50,24 +58,34 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
     public BinaryOperator<Set<T>> combiner() {
         System.out.println(this.getClass().getName() + " combiner invoked!");
         return (set1, set2) -> {
+            System.out.println("combiner function invoked Memory set1 ID is: " + System.identityHashCode(set1));
+            System.out.println("combiner function invoked Memory set2 ID is: " + System.identityHashCode(set2));
             set1.addAll(set2);
             return set1;
         };
     }
 
+    /**
+     * 如果中间结果与最终结果不同则此方法会被调用，中间结果类型与最终结果类型是否相同
+     * 可以通过设置 Characteristics.IDENTITY_FINISH 枚举类型来表明开发者的意图。
+     */
     @Override
     public Function<Set<T>, Set<T>> finisher() {
         System.out.println(this.getClass().getName() + " finisher invoked!");
-        return Function.identity();
+//        return Function.identity();
+        return (t) -> {
+            System.out.println("finisher function invoked Memory t ID is: " + System.identityHashCode(t));
+            return t;
+        };
     }
 
     @Override
     public Set<Characteristics> characteristics() {
         System.out.println(this.getClass().getName() + " characteristics invoked!");
 
-        return Collections.unmodifiableSet(EnumSet.of(Characteristics.IDENTITY_FINISH, Characteristics.UNORDERED));
+        // return Collections.unmodifiableSet(EnumSet.of(Characteristics.IDENTITY_FINISH, Characteristics.UNORDERED));
         // 不包含 Characteristics.IDENTITY_FINISH 时会调用 finisher() 函数
-//        return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
+        return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
     }
 
     /**
@@ -85,7 +103,10 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
      *          container = evaluate(ReduceOps.makeRef(collector));
      *      }
      *      // 这里会调用一次 characteristics() 方法
-     *      return collector.characteristics().contains(Collector.Characteristics.IDENTITY_FINISH) ? (R) container : collector.finisher().apply(container);
+     *      return collector.characteristics().contains(Collector.Characteristics.IDENTITY_FINISH)
+     *          ? (R) container
+     *          // 不包含则执行 finisher() 函数
+     *          : collector.finisher().apply(container);
      * }
      * </pre>
      * 3: makeRef()方法调用Collector接口中的方法：
@@ -104,6 +125,7 @@ public class MyCollector<T> implements Collector<T, Set<T>, Set<T>> {
         set.add("Java");
         set.add("Python");
         set.add("JavaScript");
-        set.stream().collect(new MyCollector<>()).forEach(System.out::println);
+        Set<String> collect = set.stream().collect(new MyCollector<>());
+        System.out.println(collect);
     }
 }
